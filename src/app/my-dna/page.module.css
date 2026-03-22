@@ -1,0 +1,189 @@
+.wrapper {
+  padding-bottom: 5rem;
+}
+
+.hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  max-width: 540px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dnaCard {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dnaHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dnaIcon {
+  font-size: 1.8rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.dnaLabel {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--amber-300);
+  letter-spacing: 0.02em;
+}
+
+.emptyDna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 2rem;
+  color: var(--text-muted);
+}
+
+.emptyDna p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.dnaBars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dnaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dnaRowLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.dnaPercent {
+  font-weight: 600;
+  color: var(--amber-400);
+}
+
+.clearBtn {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tipsCard {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tipsTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 0;
+}
+
+.tips {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tips li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.tips li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--amber-700);
+}
+
+/* Shelf */
+.shelf {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.shelfHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.shelfTitle {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.shelfItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ratedBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  color: var(--amber-600);
+}

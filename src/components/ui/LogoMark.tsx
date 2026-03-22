@@ -1,0 +1,26 @@
+/** SVG logo mark for SILLAGE */
+export function LogoMark({ size = 20 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="logo-grad" x1="0" y1="0" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#EACEAA" />
+          <stop offset="100%" stopColor="#D39858" />
+        </linearGradient>
+      </defs>
+      {/* Stylised bottle silhouette */}
+      <rect x="7" y="9.5" width="6" height="8" rx="1.2" fill="url(#logo-grad)" />
+      <rect x="8.5" y="5.5" width="3" height="4.5" rx="0.9" fill="url(#logo-grad)" />
+      <rect x="7.5" y="3.5" width="5" height="2.8" rx="0.9" fill="#D39858" />
+      {/* Top cap highlight */}
+      <rect x="8" y="3.5" width="3" height="1" rx="0.5" fill="#EACEAA" fillOpacity="0.55" />
+    </svg>
+  );
+}

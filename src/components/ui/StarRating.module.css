@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sm .star { font-size: 0.9rem; }
+.md .star { font-size: 1.2rem; }
+.lg .star { font-size: 1.6rem; }
+
+.star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1px;
+  color: var(--noir-700);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  line-height: 1;
+}
+
+.star:hover {
+  transform: scale(1.15);
+}
+
+.active {
+  color: var(--amber-400);
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.4));
+}
+
+.readonly .star {
+  cursor: default;
+  pointer-events: none;
+}

@@ -1,0 +1,588 @@
+.wrapper {
+  padding-bottom: 5rem;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.heroBlob {
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.heroVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fragranceImageBox {
+  width: 220px;
+  height: 280px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(52, 21, 15, 0.7), rgba(21, 12, 12, 0.95));
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-glow-strong), var(--shadow-lg);
+}
+
+
+
+.imageGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(201, 168, 76, 0.1), transparent 70%);
+}
+
+.concTag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.8rem;
+}
+
+/* Info */
+.heroInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fragName {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 400;
+  margin: 0;
+}
+
+.matchRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.matchSub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0;
+}
+
+.families {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.yourRating {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  background: rgba(211, 152, 88, 0.05);
+  border: 1px solid rgba(211, 152, 88, 0.10);
+  border-radius: var(--radius-md);
+}
+
+.ratingLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ratedNote {
+  font-size: 0.75rem;
+  color: var(--whiskey-sour);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--whiskey-sour);
+  line-height: 1;
+}
+
+.volume {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Body layout */
+.bodyLayout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .bodyLayout { grid-template-columns: 1fr; }
+}
+
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Sections */
+.section {
+  padding: 1.75rem;
+}
+
+.sectionTitle {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0 0 1.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionIcon {
+  color: var(--whiskey-sour);
+  font-size: 1rem;
+}
+
+/* Match reasons */
+.reasons {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.reason {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.reasonDot {
+  color: var(--whiskey-sour);
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 0.65rem;
+}
+
+/* Notes */
+.notesLayout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+.noteCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.noteCatLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--whiskey-sour);
+}
+
+.notePills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.notePill {
+  padding: 0.25rem 0.65rem;
+  background: rgba(201, 168, 76, 0.07);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Performance */
+.perfRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.ratingBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ratingBarLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  min-width: 80px;
+}
+
+.ratingBarValue {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--whiskey-sour);
+  min-width: 36px;
+  text-align: right;
+}
+
+.perfTags {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.perfTagLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.perfTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* Reviews */
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.review {
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--honey-garlic), var(--whiskey-sour));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--balsamico);
+  flex-shrink: 0;
+}
+
+.reviewMeta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.reviewAuthor {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.reviewTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+/* DNA match tag — whiskey-sour tinted, never neon */
+.dnaTag {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(211, 152, 88, 0.08);
+  color: var(--whiskey-sour);
+  border: 1px solid rgba(211, 152, 88, 0.18);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+/* Context tags (weather, occasion) — muted champagne linen */
+.weatherTag {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(234, 206, 170, 0.06);
+  color: var(--champagne-dim);
+  border: 1px solid rgba(234, 206, 170, 0.12);
+  border-radius: var(--radius-full);
+}
+
+.reviewRating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.reviewDate {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.reviewText {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sideCard {
+  padding: 1.5rem;
+}
+
+.sideTitle {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--whiskey-sour);
+  margin: 0 0 1rem 0;
+}
+
+/* As seen on */
+.celebList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.celebItem {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.celebItem::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--amber-700);
+  font-size: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Retailers */
+.retailers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.retailer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.retailer:hover {
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.retailerName {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.retailerPrice {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--whiskey-sour);
+}
+
+/* Stores */
+.stores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.store {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.storeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.storeName {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.storeAddress {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.storeDist {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--honey-garlic);
+  white-space: nowrap;
+}
+
+/* Layered with */
+.layeredList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.layeredItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.layeredItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
+}
+
+.layeredIcon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  background: rgba(211, 152, 88, 0.05);
+  overflow: hidden;
+}
+
+.layeredBrand {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--whiskey-sour);
+  font-weight: 600;
+}
+
+.layeredName {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Related */
+.related {
+  margin-top: 4rem;
+}
+
+.relatedHeader {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
