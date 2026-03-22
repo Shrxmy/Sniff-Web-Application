@@ -101,6 +101,52 @@
   color: var(--text-muted);
 }
 
+.riskRow {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.riskLabel {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.riskPill {
+  font-size: 0.72rem;
+  border-radius: 999px;
+  padding: 0.16rem 0.46rem;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.riskLow {
+  color: #9adf9a;
+  border-color: rgba(154, 223, 154, 0.38);
+  background: rgba(154, 223, 154, 0.14);
+}
+
+.riskMedium {
+  color: var(--amber-300);
+  border-color: rgba(236, 171, 73, 0.42);
+  background: rgba(236, 171, 73, 0.12);
+}
+
+.riskHigh {
+  color: #ffb4a3;
+  border-color: rgba(255, 134, 107, 0.42);
+  background: rgba(255, 134, 107, 0.14);
+}
+
+.riskHint {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
 .description {
   font-size: 0.95rem;
   color: var(--text-secondary);
@@ -458,6 +504,19 @@
   gap: 0.6rem;
 }
 
+.buyHint {
+  margin: 0 0 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
+.buySavings {
+  margin: -0.25rem 0 0.75rem;
+  color: var(--amber-300);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 .retailer {
   display: flex;
   justify-content: space-between;
@@ -475,15 +534,48 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+.retailerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.retailerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
 .retailerName {
   font-size: 0.875rem;
   color: var(--text-secondary);
+}
+
+.bestDeal {
+  display: inline-flex;
+  width: fit-content;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(236, 171, 73, 0.45);
+  color: var(--amber-300);
+  background: rgba(236, 171, 73, 0.12);
+  border-radius: 999px;
+  padding: 0.15rem 0.4rem;
 }
 
 .retailerPrice {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--whiskey-sour);
+}
+
+.retailerCta {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
 }
 
 /* Stores */
@@ -498,6 +590,16 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.5rem;
+  text-decoration: none;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.store:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
 }
 
 .storeInfo {

@@ -49,6 +49,7 @@ export interface StoreLocation {
   name: string;
   address: string;
   distance: string;
+  mapUrl?: string;
 }
 
 export interface OnlineRetailer {
@@ -82,6 +83,15 @@ export interface Fragrance {
   concentration: "EDP" | "EDT" | "EXP" | "EDC" | "Parfum";
   gender: "unisex" | "feminine" | "masculine";
   year: number;
+  sourceUrl?: string;
+  sourceRatingValue?: number;
+  sourceRatingCount?: number;
+  sourceMainAccords?: string[];
+  marketCategory?: string;
+  marketTargetAudience?: string;
+  marketLongevity?: string;
+  researchInsights?: string[];
+  majorCompounds?: string[];
 }
 
 export interface UserRating {

@@ -26,7 +26,15 @@ export function computeMatchScore(
   });
 
   // Normalize and cap at 100
-  const normalized = Math.min(Math.round((matchScore / 100) * 120), 100);
+  let normalized = Math.min(Math.round((matchScore / 100) * 120), 100);
+
+  // Add a light confidence bonus when crowd data is available.
+  if (fragrance.sourceRatingValue && fragrance.sourceRatingCount) {
+    const ratingBoost = Math.max(0, fragrance.sourceRatingValue - 3.5) * 6;
+    const volumeBoost = Math.min(Math.log10(fragrance.sourceRatingCount + 1) * 2.5, 8);
+    normalized = Math.min(100, Math.round(normalized + ratingBoost + volumeBoost));
+  }
+
   return Math.max(normalized, 20);
 }
 
@@ -60,6 +68,16 @@ export function getMatchReasons(
 
   if (fragrance.sillage >= 8) {
     reasons.push("Strong sillage — commands attention");
+  }
+
+  if (fragrance.sourceRatingValue && fragrance.sourceRatingCount) {
+    reasons.push(
+      `${fragrance.sourceRatingValue.toFixed(2)}/5 rating from ${fragrance.sourceRatingCount.toLocaleString()} community votes`
+    );
+  }
+
+  if (fragrance.researchInsights && fragrance.researchInsights.length > 0) {
+    reasons.push("Includes aroma-psychology and brain-response references from research datasets");
   }
 
   if (reasons.length === 0) {
