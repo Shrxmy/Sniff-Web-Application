@@ -1,4 +1,4 @@
-# SNIFF — AI-Powered Fragrance Discovery
+# SNIFF - AI-Powered Fragrance Discovery
 
 > Eliminate blind buying. Discover luxury fragrances matched to your unique Scent DNA.
 
@@ -10,9 +10,9 @@
 
 ## Overview
 
-**SNIFF** is an AI-driven fragrance discovery platform built for L'Oréal Luxe. It profiles users through a Scent DNA system — turning fragrance ratings into a personalised compatibility engine — so every recommendation is earned, not random.
+**SNIFF** is an AI-driven fragrance discovery platform built for L'Oreal Luxe. It profiles users through a Scent DNA system - turning fragrance ratings into a personalized compatibility engine - so every recommendation is earned, not random.
 
-**Design language:** Champagne · Whiskey Sour · Honey Garlic · Burnt Coffee · Balsamico — a warm, earthy palette with Cormorant Garamond serif headings and Inter body text.
+**Design language:** Champagne, Whiskey Sour, Honey Garlic, Burnt Coffee, Balsamico - a warm, earthy palette with Cormorant Garamond serif headings and Inter body text.
 
 ---
 
@@ -20,34 +20,39 @@
 
 | Feature | Description |
 |---|---|
-| **Scent DNA** | Rate fragrances → the system computes your family affinities in real time |
-| **AI Match Score** | Every fragrance receives a 0–100% personal compatibility score |
+| **Scent DNA** | Rate fragrances -> the system computes your family affinities in real time |
+| **AI Match Score** | Every fragrance receives a 0-100% personal compatibility score |
 | **Discover** | Filter by mood, occasion, scent family, and sort by match / longevity / sillage |
-| **Explore** | Full-text search across the catalog with grid / list toggle |
-| **Fragrance Detail** | Notes pyramid, performance bars, community reviews, retailers, layering suggestions |
-| **SVG Icons** | No emojis — custom SVG perfume bottle icons per scent family |
+| **Explore** | Full-text search across 250+ fragrances with grid/list toggle + expanded dataset matches |
+| **Fragrance Detail** | Notes pyramid, performance bars, community insights, blind-buy risk indicator, retailers |
+| **Expanded Catalog** | 33 handcrafted profiles + 220 auto-generated entries from merged CSV datasets |
+| **Pairing Engine** | Dataset-driven accord pairing with recommendation explanations |
+| **Psychology Insights** | Aroma-psychology research annotations on qualifying fragrances |
+| **SVG Icons** | Custom SVG perfume bottle icons by scent family (no emoji dependencies) |
 
 ---
 
 ## Pages
 
-```
-/             → Landing page, featured shelf, how-it-works
-/my-dna       → Scent DNA builder with live profile sidebar
-/discover     → AI-ranked matches with filters
-/explore      → Full search catalog
-/fragrance/[id] → Detailed fragrance profile (SSR)
+```txt
+/                   -> Landing page, featured shelf, how-it-works
+/my-dna             -> Scent DNA builder + realistic quiz + recommendation confidence
+/discover           -> AI-ranked matches with filters
+/explore            -> Full search catalog + external dataset results
+/fragrance/[id]     -> Detailed fragrance profile + blind-buy risk
+/api/dataset-search -> Server-side dataset search endpoint
 ```
 
 ---
 
 ## Tech Stack
 
-- **Framework** — Next.js 16 (App Router) + TypeScript
-- **Styling** — Vanilla CSS Modules (zero runtime CSS-in-JS)
-- **State** — React Context API
-- **Icons** — Custom inline SVGs
-- **Fonts** — Cormorant Garamond + Inter (Google Fonts)
+- **Framework** - Next.js 16 (App Router) + TypeScript 5
+- **Styling** - Vanilla CSS Modules
+- **State** - React Context API + localStorage persistence
+- **Server** - Next.js API routes for dataset search
+- **Icons** - Custom inline SVGs
+- **Fonts** - Cormorant Garamond + Inter (Google Fonts)
 
 ---
 
@@ -59,58 +64,82 @@ npm install
 
 # Run development server
 npm run dev
-# → http://localhost:3000
+# -> http://localhost:3000
 
 # Lint
 npm run lint
 
 # Production build
 npm run build
+
+# Regenerate dataset artifacts (after CSV updates)
+npm run generate:data
 ```
 
 ---
 
 ## Project Structure
 
-```
+```txt
 src/
-├── app/                  # Next.js App Router pages + CSS modules
-│   ├── page.tsx          # Home
-│   ├── my-dna/           # Scent DNA builder
-│   ├── discover/         # AI matches + filters
-│   ├── explore/          # Search catalog
-│   └── fragrance/[id]/   # Fragrance detail (dynamic)
-├── components/
-│   ├── layout/           # Navbar, Footer
-│   └── ui/               # FragranceCard, MatchBadge, StarRating, ScentIcon, LogoMark
-├── context/              # UserContext (ratings + DNA state)
-├── data/                 # fragrances.ts, userData.ts
-├── types/                # fragrance.ts TypeScript interfaces
-└── utils/                # scentDNA.ts, matchEngine.ts
+|- app/                     # Next.js App Router pages + CSS modules
+|  |- page.tsx              # Home
+|  |- my-dna/               # Scent DNA builder + quiz + recommendations
+|  |- discover/             # AI matches + filters
+|  |- explore/              # Search catalog + dataset expansion results
+|  |- fragrance/[id]/       # Fragrance detail + blind-buy risk scoring
+|  \- api/dataset-search/   # Server-side dataset search endpoint
+|- components/
+|  |- layout/               # Navbar, Footer
+|  \- ui/                   # FragranceCard, MatchBadge, StarRating, ScentIcon, LogoMark
+|- context/                 # UserContext (ratings + DNA state)
+|- data/
+|  |- fragrances.ts         # Handcrafted + generated catalog export
+|  |- datasetCatalog.ts     # Dataset-to-catalog generation logic
+|  |- generated/            # csvKnowledge.ts, datasetSearchIndex.ts
+|  \- csv/                  # Source CSV datasets
+|- types/                   # fragrance.ts, datasetSearch.ts
+\- utils/                   # scentDNA.ts, matchEngine.ts, currency.ts, pairingEngine.ts
 ```
+
+---
+
+## Data and Catalog
+
+### Handcrafted Base
+- 33 curated luxury fragrance profiles
+
+### Auto-Generated Expansion
+- 220 dataset-backed entries synthesized from merged CSV sources:
+  - `fra_cleaned.csv` (24,063 rows)
+  - `fra_perfumes.csv` (70,103 rows)
+  - psychology/brain-function/compound datasets
+
+### Current Total
+- 253+ fragrances searchable and browsable in-app
+
+### Pipeline
+```bash
+npm run generate:data
+# Updates src/data/generated/csvKnowledge.ts and src/data/generated/datasetSearchIndex.ts
+```
+
+All data is precomputed at build time; no runtime external API is required.
 
 ---
 
 ## Deployment
 
-This app is ready for Vercel out of the box — no additional configuration needed.
+This app is ready for Vercel with zero additional runtime configuration.
 
 ```bash
-# Install Vercel CLI (if not already installed)
+# Install Vercel CLI (optional)
 npm i -g vercel
 
 # Deploy
 vercel
 ```
 
-Or connect the repository directly in the [Vercel dashboard](https://vercel.com/new) and it will auto-detect Next.js.
+Or connect the repository in the [Vercel dashboard](https://vercel.com/new) and it auto-detects Next.js.
 
-> **Note:** No environment variables are required for the current build (all data is static).
-
----
-
-## Data
-
-15 curated luxury fragrances are included as static TypeScript data covering YSL, Tom Ford, Dior, Chanel, Maison Margiela, Armani, Prada, Viktor & Rolf, Byredo, and Maison Francis Kurkdjian.
-
-A full [CSV dataset](https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset/data?select=fra_perfumes.csv) (`fra_cleaned.csv`) is available in `src/data/` for future data pipeline work.
+> **Note:** No environment variables are required for the current build.
