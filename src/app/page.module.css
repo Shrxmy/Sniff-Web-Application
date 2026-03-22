@@ -7,6 +7,9 @@
   justify-content: center;
   overflow: hidden;
   padding: 7rem 0 4rem;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(227, 162, 72, 0.14), transparent 48%),
+    linear-gradient(180deg, rgba(17, 9, 9, 0.72) 0%, rgba(17, 9, 9, 0) 100%);
 }
 
 .heroBlobs {
@@ -134,7 +137,7 @@
 }
 
 .featuresSection {
-  background: linear-gradient(180deg, var(--noir-950) 0%, rgba(30, 20, 12, 1) 100%);
+  background: linear-gradient(180deg, var(--noir-950) 0%, rgba(40, 21, 12, 1) 100%);
 }
 
 .featuresGrid {
@@ -271,7 +274,7 @@
 }
 
 .gapCard {
-  background: linear-gradient(135deg, rgba(42, 30, 18, 0.9), rgba(26, 18, 10, 0.97));
+  background: linear-gradient(140deg, rgba(56, 30, 17, 0.92), rgba(27, 15, 11, 0.98));
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 2rem;
@@ -284,6 +287,8 @@
 
 .gapCard:hover {
   border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
 
 .gapCardAlt {

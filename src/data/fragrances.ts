@@ -1,6 +1,8 @@
 import { Fragrance } from "@/types/fragrance";
+import { csvDatasetMeta, csvEnrichmentById } from "@/data/generated/csvKnowledge";
+import { buildDatasetCatalog } from "@/data/datasetCatalog";
 
-export const fragrances: Fragrance[] = [
+const baseFragrances: Fragrance[] = [
   {
     id: "black-opium-ysl",
     name: "Black Opium",
@@ -810,6 +812,69 @@ export const fragrances: Fragrance[] = [
     year: 2011,
   },
 ];
+
+const RETAILER_SEARCH_BASE: Record<string, string> = {
+  lazada: "https://www.lazada.com.ph/catalog/?q=",
+  shopee: "https://shopee.ph/search?keyword=",
+  "ysl official": "https://www.yslbeauty.com/search?q=",
+  "dior official": "https://www.dior.com/en_int/beauty/search?q=",
+  "rustan's online": "https://rustans.com/search?type=product&q=",
+  beautymnl: "https://www.beautymnl.com/search?utf8=%E2%9C%93&q=",
+};
+
+function createStoreMapUrl(storeName: string, address: string): string {
+  const query = encodeURIComponent(`${storeName} ${address}`);
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+}
+
+function createRetailerUrl(retailerName: string, fragrance: Fragrance): string {
+  const key = retailerName.toLowerCase();
+  const base = RETAILER_SEARCH_BASE[key] ?? "https://www.google.com/search?q=";
+  const query = encodeURIComponent(`${fragrance.brand} ${fragrance.name} ${retailerName}`);
+  return `${base}${query}`;
+}
+
+function enrichFragrance(fragrance: Fragrance): Fragrance {
+  const enrichment = csvEnrichmentById[fragrance.id];
+
+  return {
+    ...fragrance,
+    sourceUrl: enrichment?.sourceUrl,
+    sourceRatingValue: enrichment?.ratingValue,
+    sourceRatingCount: enrichment?.ratingCount,
+    sourceMainAccords: enrichment?.mainAccords,
+    marketCategory: enrichment?.marketCategory,
+    marketTargetAudience: enrichment?.marketTargetAudience,
+    marketLongevity: enrichment?.marketLongevity,
+    researchInsights: enrichment?.researchInsights,
+    majorCompounds: enrichment?.majorCompounds,
+    storeLocations: fragrance.storeLocations.map((store) => ({
+      ...store,
+      mapUrl: createStoreMapUrl(store.name, store.address),
+    })),
+    onlineRetailers: fragrance.onlineRetailers.map((retailer) => ({
+      ...retailer,
+      url:
+        retailer.url && retailer.url !== "#"
+          ? retailer.url
+          : createRetailerUrl(retailer.name, fragrance),
+    })),
+  };
+}
+
+const enrichedBase = baseFragrances.map(enrichFragrance);
+const expandedDatasetFragrances = buildDatasetCatalog(enrichedBase);
+
+export const fragrances: Fragrance[] = [...enrichedBase, ...expandedDatasetFragrances];
+
+export const catalogStats = {
+  localCatalogCount: fragrances.length,
+  handcraftedCatalogCount: enrichedBase.length,
+  datasetCatalogCount: expandedDatasetFragrances.length,
+  sourceDatasetRows:
+    csvDatasetMeta.sourceCounts.fraCleaned + csvDatasetMeta.sourceCounts.fraPerfumes,
+  mappedCatalogRows: csvDatasetMeta.mappedFragrances,
+};
 
 export function getFragranceById(id: string): Fragrance | undefined {
   return fragrances.find((f) => f.id === id);

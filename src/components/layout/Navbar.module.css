@@ -9,15 +9,15 @@
   align-items: center;
   transition: background var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
   border-bottom: 1px solid transparent;
-  background: rgba(19, 15, 11, 0.6);
+  background: linear-gradient(180deg, rgba(18, 10, 9, 0.86), rgba(18, 10, 9, 0.62));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .scrolled {
-  background: rgba(19, 15, 11, 0.92);
+  background: linear-gradient(180deg, rgba(18, 10, 9, 0.96), rgba(18, 10, 9, 0.92));
   border-bottom-color: var(--border);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(201, 168, 76, 0.05);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.46), 0 1px 0 rgba(227, 162, 72, 0.14);
 }
 
 .inner {
@@ -78,7 +78,7 @@
 
 .navLink:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(227, 162, 72, 0.1);
 }
 
 .active {
@@ -161,7 +161,7 @@
   top: 72px;
   left: 0;
   right: 0;
-  background: rgba(19, 15, 11, 0.97);
+  background: linear-gradient(165deg, rgba(22, 12, 10, 0.98), rgba(16, 9, 8, 0.98));
   border-bottom: 1px solid var(--border);
   padding: 1.5rem;
   display: flex;
@@ -182,7 +182,7 @@
 }
 
 .mobileLink:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(227, 162, 72, 0.12);
   color: var(--text-primary);
 }
 

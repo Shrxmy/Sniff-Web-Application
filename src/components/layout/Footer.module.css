@@ -1,5 +1,7 @@
 .footer {
-  background: linear-gradient(180deg, var(--noir-950) 0%, rgba(10, 7, 5, 1) 100%);
+  background:
+    radial-gradient(circle at 85% 16%, rgba(227, 162, 72, 0.12), transparent 40%),
+    linear-gradient(180deg, #120a09 0%, #0f0707 100%);
   border-top: 1px solid var(--border);
   padding-top: 4rem;
 }
@@ -73,7 +75,7 @@
 }
 
 .column a:hover {
-  color: var(--amber-400);
+  color: #f2be73;
 }
 
 .bottom {

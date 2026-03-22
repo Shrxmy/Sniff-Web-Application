@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { fragrances, searchFragrances } from "@/data/fragrances";
 import { useUser } from "@/context/UserContext";
@@ -8,12 +9,15 @@ import { FragranceCard } from "@/components/ui/FragranceCard";
 import { ScentIcon } from "@/components/ui/ScentIcon";
 import { computeMatchScore } from "@/utils/matchEngine";
 import { capitalize } from "@/utils/scentDNA";
+import { formatPhp } from "@/utils/currency";
+import type { DatasetSearchEntryWithPairings } from "@/types/datasetSearch";
 import styles from "./page.module.css";
 
-export default function ExplorePage() {
-  const { profile } = useUser();
+export default function ExplorePage() {  const router = useRouter();  const { profile } = useUser();
   const [query, setQuery] = useState("");
   const [view, setView] = useState<"grid" | "list">("grid");
+  const [externalResults, setExternalResults] = useState<DatasetSearchEntryWithPairings[]>([]);
+  const [isExternalLoading, setIsExternalLoading] = useState(false);
 
   const results = useMemo(() => {
     const base = query.trim().length > 0 ? searchFragrances(query) : fragrances;
@@ -22,6 +26,44 @@ export default function ExplorePage() {
       matchScore: computeMatchScore(f, profile.scentDNA),
     }));
   }, [query, profile.scentDNA]);
+
+  useEffect(() => {
+    const trimmed = query.trim();
+    if (trimmed.length < 2) {
+      setExternalResults([]);
+      setIsExternalLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(async () => {
+      setIsExternalLoading(true);
+      try {
+        const response = await fetch(`/api/dataset-search?q=${encodeURIComponent(trimmed)}&limit=12`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          setExternalResults([]);
+          return;
+        }
+        const data = (await response.json()) as { results?: DatasetSearchEntryWithPairings[] };
+        setExternalResults(data.results || []);
+      } catch {
+        if (!controller.signal.aborted) {
+          setExternalResults([]);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsExternalLoading(false);
+        }
+      }
+    }, 260);
+
+    return () => {
+      controller.abort();
+      clearTimeout(timeout);
+    };
+  }, [query]);
 
   return (
     <div className={styles.wrapper}>
@@ -118,12 +160,82 @@ export default function ExplorePage() {
                   >
                     {frag.matchScore}% Match
                   </span>
-                  <span className={styles.listPrice}>{frag.price}</span>
+                  <span className={styles.listPrice}>{formatPhp(frag.price)}</span>
                   <span className={styles.listConc}>{frag.concentration}</span>
                 </div>
               </Link>
             ))}
           </div>
+        )}
+
+        {query.trim().length >= 2 && (
+          <section className={styles.externalSection}>
+            <div className={styles.externalHeader}>
+              <h2>Expanded Dataset Matches</h2>
+              <p>
+                Additional records from merged CSV datasets. Opens source links in a new tab.
+              </p>
+            </div>
+
+            {isExternalLoading ? (
+              <p className={styles.externalState}>Searching the full dataset...</p>
+            ) : externalResults.length === 0 ? (
+              <p className={styles.externalState}>No additional dataset matches for this query yet.</p>
+            ) : (
+              <div className={styles.externalGrid}>
+                {externalResults.map((item) => (
+                  <a
+                    key={`${item.source}-${item.brand}-${item.name}`}
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.externalCard}
+                  >
+                    <div className={styles.externalTop}>
+                      <span className={styles.externalBrand}>{item.brand}</span>
+                      <span className={styles.externalSource}>{item.source.replace("_", " ")}</span>
+                    </div>
+                    <h3>{item.name}</h3>
+                    <p>
+                      {item.category || "Independent listing"}
+                      {item.targetAudience ? ` • ${item.targetAudience}` : ""}
+                    </p>
+                    <div className={styles.externalMeta}>
+                      {item.ratingValue ? <span>{item.ratingValue.toFixed(2)} / 5</span> : <span>No rating</span>}
+                      {item.ratingCount ? <span>{item.ratingCount.toLocaleString()} reviews</span> : <span>New data row</span>}
+                    </div>
+                    {item.pairings.length > 0 && (
+                      <div className={styles.pairingsWrap}>
+                        <p>Pairs Well With</p>
+                        <div className={styles.pairingsList}>
+                          {item.pairings.map((pairing) => (
+                            <div
+                              key={`${item.name}-${pairing.id}`}
+                              className={styles.pairingLink}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                router.push(`/fragrance/${pairing.id}`);
+                              }}
+                              role="button"
+                              tabIndex={0}
+                              onKeyDown={(event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                  event.preventDefault();
+                                  router.push(`/fragrance/${pairing.id}`);
+                                }
+                              }}
+                            >
+                              {pairing.name} ({pairing.score}%)
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </a>
+                ))}
+              </div>
+            )}
+          </section>
         )}
       </div>
     </div>

@@ -1,37 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ============================================================
-   DESIGN TOKENS — Champagne / Honey Garlic / Whiskey Sour
-   Burnt Coffee / Balsamico palette
-   ============================================================ */
+  DESIGN TOKENS — Amber-forward, vibrant, scent-luxe
+  ============================================================ */
 :root {
   /* Palette */
-  --champagne:    #EACEAA;   /* 234, 206, 170 — primary text & light accent */
-  --honey-garlic: #85431E;   /* 133, 67,  30  — secondary accent / deep warm */
-  --whiskey-sour: #D39858;   /* 211, 152, 88  — primary gold accent */
-  --burnt-coffee: #34150F;   /* 52,  21,  15  — mid-tone background */
-  --balsamico:    #150C0C;   /* 21,  12,  12  — primary background */
+  --champagne:    #F3DFC2;
+  --honey-garlic: #A0521F;
+  --whiskey-sour: #E3A248;
+  --burnt-coffee: #2E170F;
+  --balsamico:    #110909;
 
   /* Derived shades */
-  --champagne-dim:  rgba(234, 206, 170, 0.7);
-  --champagne-mute: rgba(234, 206, 170, 0.35);
-  --champagne-faint:rgba(234, 206, 170, 0.08);
-  --whiskey-dim:   rgba(211, 152, 88, 0.6);
-  --whiskey-faint: rgba(211, 152, 88, 0.08);
-  --honey-dim:     rgba(133, 67, 30, 0.5);
+  --champagne-dim:  rgba(243, 223, 194, 0.74);
+  --champagne-mute: rgba(243, 223, 194, 0.42);
+  --champagne-faint:rgba(243, 223, 194, 0.08);
+  --whiskey-dim:   rgba(227, 162, 72, 0.68);
+  --whiskey-faint: rgba(227, 162, 72, 0.1);
+  --honey-dim:     rgba(160, 82, 31, 0.52);
 
   /* Semantic */
   --bg-primary:    var(--balsamico);
   --bg-secondary:  var(--burnt-coffee);
-  --bg-card:       rgba(52, 21, 15, 0.75);
+  --bg-card:       rgba(46, 23, 15, 0.8);
   --bg-glass:      rgba(255, 255, 255, 0.025);
   --text-primary:  var(--champagne);
   --text-secondary:var(--champagne-dim);
   --text-muted:    var(--champagne-mute);
-  --border:        rgba(211, 152, 88, 0.12);
-  --border-hover:  rgba(211, 152, 88, 0.35);
+  --border:        rgba(227, 162, 72, 0.16);
+  --border-hover:  rgba(227, 162, 72, 0.42);
   --accent:        var(--whiskey-sour);
-  --accent-hover:  #e0a96a;
+  --accent-hover:  #f2b968;
+
+  /* Compatibility aliases used across module CSS */
+  --gold: var(--whiskey-sour);
+  --gold-light: #f6c173;
+  --amber-400: #efb45f;
+  --amber-500: #e3a248;
+  --amber-600: #c98333;
+  --amber-700: #ad6b29;
+  --amber-800: #8f5620;
+  --noir-950: var(--balsamico);
 
   /* Match score — earthy, never neon */
   --match-good: #8CA882;   /* muted sage — warm botanical green */
@@ -41,8 +50,8 @@
   --shadow-sm:          0 1px 3px rgba(0, 0, 0, 0.5);
   --shadow-md:          0 4px 16px rgba(0, 0, 0, 0.55);
   --shadow-lg:          0 12px 40px rgba(0, 0, 0, 0.65);
-  --shadow-glow:        0 0 40px rgba(211, 152, 88, 0.10);
-  --shadow-glow-strong: 0 0 60px rgba(211, 152, 88, 0.18);
+  --shadow-glow:        0 0 44px rgba(227, 162, 72, 0.16);
+  --shadow-glow-strong: 0 0 70px rgba(227, 162, 72, 0.26);
 
   /* Radius */
   --radius-sm:   6px;
@@ -74,6 +83,10 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(227, 162, 72, 0.16), transparent 38%),
+    radial-gradient(circle at 90% 78%, rgba(160, 82, 31, 0.2), transparent 34%),
+    linear-gradient(160deg, #180d0a 0%, #120808 48%, #0f0707 100%);
   color: var(--text-primary);
   line-height: 1.6;
   font-size: 16px;
@@ -149,7 +162,7 @@ a:hover { color: var(--champagne); }
    CARDS
    ============================================================ */
 .glass-card {
-  background: var(--bg-card);
+  background: linear-gradient(165deg, rgba(47, 25, 16, 0.86), rgba(22, 12, 10, 0.94));
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   backdrop-filter: blur(12px);
@@ -159,7 +172,7 @@ a:hover { color: var(--champagne); }
 .glass-card:hover {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-glow);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* ============================================================
@@ -184,14 +197,14 @@ a:hover { color: var(--champagne); }
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--honey-garlic), var(--whiskey-sour));
+  background: linear-gradient(135deg, #a45220, #e3a248 65%, #f4bb6a 100%);
   color: var(--balsamico);
   font-weight: 600;
-  box-shadow: 0 4px 20px rgba(211, 152, 88, 0.22);
+  box-shadow: 0 6px 26px rgba(227, 162, 72, 0.28);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--whiskey-sour), #e0a96a);
-  box-shadow: 0 6px 28px rgba(211, 152, 88, 0.36);
+  background: linear-gradient(135deg, #be6d2e, #f2b968);
+  box-shadow: 0 9px 34px rgba(227, 162, 72, 0.4);
   transform: translateY(-1px);
   color: var(--balsamico);
 }
@@ -314,7 +327,7 @@ a:hover { color: var(--champagne); }
 .progress-fill {
   height: 100%;
   border-radius: var(--radius-full);
-  background: linear-gradient(90deg, var(--honey-garlic), var(--whiskey-sour));
+  background: linear-gradient(90deg, #9f4f21, #e3a248 60%, #f0bc73);
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -330,8 +343,8 @@ a:hover { color: var(--champagne); }
   to   { opacity: 1; }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(211, 152, 88, 0.08); }
-  50%       { box-shadow: 0 0 40px rgba(211, 152, 88, 0.20); }
+  0%, 100% { box-shadow: 0 0 20px rgba(227, 162, 72, 0.1); }
+  50%       { box-shadow: 0 0 42px rgba(227, 162, 72, 0.26); }
 }
 
 .animate-fade-in-up { animation: fadeInUp 0.6s ease both; }

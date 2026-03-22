@@ -3,7 +3,7 @@
   text-decoration: none;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: linear-gradient(160deg, rgba(42, 30, 18, 0.9), rgba(26, 18, 10, 0.97));
+  background: linear-gradient(160deg, rgba(57, 31, 18, 0.92), rgba(26, 15, 11, 0.98));
   border: 1px solid var(--border);
   transition: all var(--transition-base);
   cursor: pointer;
@@ -12,7 +12,7 @@
 
 .card:hover {
   border-color: var(--border-hover);
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-glow), var(--shadow-lg);
 }
 
@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(62, 44, 27, 0.6), rgba(26, 18, 10, 0.9));
+  background: linear-gradient(135deg, rgba(70, 40, 21, 0.66), rgba(26, 15, 11, 0.92));
   position: relative;
 }
 
@@ -44,7 +44,7 @@
 .imageGlow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 40%, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 40%, rgba(227, 162, 72, 0.16) 0%, transparent 72%);
 }
 
 .matchOverlay {

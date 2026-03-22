@@ -8,6 +8,7 @@ import { ScentIcon } from "@/components/ui/ScentIcon";
 import { useUser } from "@/context/UserContext";
 import { computeMatchScore } from "@/utils/matchEngine";
 import { capitalize } from "@/utils/scentDNA";
+import { formatPhp } from "@/utils/currency";
 import styles from "./FragranceCard.module.css";
 
 interface FragranceCardProps {
@@ -40,7 +41,7 @@ export function FragranceCard({ fragrance, showRating = true, variant = "default
       <div className={styles.content}>
         <div className={styles.header}>
           <span className={styles.brand}>{fragrance.brand}</span>
-          <span className={styles.price}>{fragrance.price}</span>
+          <span className={styles.price}>{formatPhp(fragrance.price)}</span>
         </div>
         <h3 className={styles.name}>{fragrance.name}</h3>
 

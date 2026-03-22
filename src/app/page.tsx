@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { fragrances } from "@/data/fragrances";
+import { catalogStats, fragrances } from "@/data/fragrances";
 import { FragranceCard } from "@/components/ui/FragranceCard";
 import styles from "./page.module.css";
 
@@ -12,7 +12,7 @@ const features = [
   },
   {
     icon: "◉",
-    title: "AI Matching",
+    title: "Scent Matching",
     description:
       "Get personalized match scores for every fragrance. See at a glance whether a scent is a great fit — or a miss — before you buy.",
   },
@@ -72,9 +72,9 @@ export default function HomePage() {
           {/* Stats */}
           <div className={`${styles.heroStats} animate-fade-in-up delay-400`}>
             {[
-              { value: "500+", label: "Fragrances" },
-              { value: "AI", label: "Powered Matching" },
-              { value: "Zero", label: "Blind Buys" },
+              { value: `${catalogStats.sourceDatasetRows.toLocaleString()}+`, label: "Dataset Rows" },
+              { value: `${catalogStats.localCatalogCount}`, label: "Curated Fragrances" },
+              { value: `${catalogStats.mappedCatalogRows}`, label: "Live Source Links" },
             ].map((s) => (
               <div key={s.label} className={styles.stat}>
                 <span className={styles.statValue}>{s.value}</span>
