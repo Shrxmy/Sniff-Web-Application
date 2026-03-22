@@ -29,20 +29,22 @@
   .layout {
     grid-template-columns: 1fr;
   }
-
-  .sidebar {
-    position: static;
-    top: auto;
-  }
 }
 
 /* Sidebar */
 .sidebar {
-  position: sticky;
-  top: 96px;
+  position: static;
+  top: auto;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+@media (min-width: 901px) {
+  .sidebar {
+    position: sticky;
+    top: 96px;
+  }
 }
 
 .dnaCard {
