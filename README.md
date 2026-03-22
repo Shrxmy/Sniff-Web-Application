@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SNIFF — AI-Powered Fragrance Discovery
+
+> Eliminate blind buying. Discover luxury fragrances matched to your unique Scent DNA.
+
+![Next.js](https://img.shields.io/badge/Next.js-16.2-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![License](https://img.shields.io/badge/license-MIT-amber)
+
+---
+
+## Overview
+
+**SNIFF** is an AI-driven fragrance discovery platform built for L'Oréal Luxe. It profiles users through a Scent DNA system — turning fragrance ratings into a personalised compatibility engine — so every recommendation is earned, not random.
+
+**Design language:** Champagne · Whiskey Sour · Honey Garlic · Burnt Coffee · Balsamico — a warm, earthy palette with Cormorant Garamond serif headings and Inter body text.
+
+---
+
+## Features
+
+| Feature | Description |
+|---|---|
+| **Scent DNA** | Rate fragrances → the system computes your family affinities in real time |
+| **AI Match Score** | Every fragrance receives a 0–100% personal compatibility score |
+| **Discover** | Filter by mood, occasion, scent family, and sort by match / longevity / sillage |
+| **Explore** | Full-text search across the catalog with grid / list toggle |
+| **Fragrance Detail** | Notes pyramid, performance bars, community reviews, retailers, layering suggestions |
+| **SVG Icons** | No emojis — custom SVG perfume bottle icons per scent family |
+
+---
+
+## Pages
+
+```
+/             → Landing page, featured shelf, how-it-works
+/my-dna       → Scent DNA builder with live profile sidebar
+/discover     → AI-ranked matches with filters
+/explore      → Full search catalog
+/fragrance/[id] → Detailed fragrance profile (SSR)
+```
+
+---
+
+## Tech Stack
+
+- **Framework** — Next.js 16 (App Router) + TypeScript
+- **Styling** — Vanilla CSS Modules (zero runtime CSS-in-JS)
+- **State** — React Context API
+- **Icons** — Custom inline SVGs
+- **Fonts** — Cormorant Garamond + Inter (Google Fonts)
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → http://localhost:3000
+
+# Lint
+npm run lint
+
+# Production build
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                  # Next.js App Router pages + CSS modules
+│   ├── page.tsx          # Home
+│   ├── my-dna/           # Scent DNA builder
+│   ├── discover/         # AI matches + filters
+│   ├── explore/          # Search catalog
+│   └── fragrance/[id]/   # Fragrance detail (dynamic)
+├── components/
+│   ├── layout/           # Navbar, Footer
+│   └── ui/               # FragranceCard, MatchBadge, StarRating, ScentIcon, LogoMark
+├── context/              # UserContext (ratings + DNA state)
+├── data/                 # fragrances.ts, userData.ts
+├── types/                # fragrance.ts TypeScript interfaces
+└── utils/                # scentDNA.ts, matchEngine.ts
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This app is ready for Vercel out of the box — no additional configuration needed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Install Vercel CLI (if not already installed)
+npm i -g vercel
 
-## Deploy on Vercel
+# Deploy
+vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Or connect the repository directly in the [Vercel dashboard](https://vercel.com/new) and it will auto-detect Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> **Note:** No environment variables are required for the current build (all data is static).
+
+---
+
+## Data
+
+15 curated luxury fragrances are included as static TypeScript data covering YSL, Tom Ford, Dior, Chanel, Maison Margiela, Armani, Prada, Viktor & Rolf, Byredo, and Maison Francis Kurkdjian.
+
+A full [CSV dataset](https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset/data?select=fra_perfumes.csv) (`fra_cleaned.csv`) is available in `src/data/` for future data pipeline work.
